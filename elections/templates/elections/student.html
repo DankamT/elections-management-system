@@ -1,0 +1,78 @@
+{% extends 'elections/dashboard.html' %}
+
+{% block content %}
+<br><br><br><br><br>
+	
+	<div class="row">
+		<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+			{% if message %}
+				<div class="login-panel panel panel-default">
+
+				<div class="panel-heading"><h3 class="info"><marquee>Welcome {{ std.firstname }} {{ std.lastname }}!!!</marquee></h3></div>
+					<div class="panel-body">
+						<div class="row">
+							<h3><a href="#application" data-toggle="modal">Postulate for a Post</a></h3>
+						</div>
+						<br><br>
+						<div class="row">
+							<h3><a href="{% url 'result' %}">VIEW RESULTS</a></h3>
+						</div><br><br>
+						<div class="row">
+							<h3><a href="{% url 'department' %}">Departmental Candidates</a></h3>
+						</div>
+						<br><br>
+						
+				</div>
+				</div>
+			{% else %}
+				<div class="login-panel panel panel-default">
+
+				<div class="panel-heading"><h3 class="info"><marquee> Welcome {{ std.firstname }} {{ std.lastname }}!!!</marquee></h3></div>
+					<div class="panel-body">
+						<div class="row">
+							<h3><a href="#application" data-toggle="modal">Postulate for a Post</a></h3>
+						</div>
+						<br><br>
+						<div class="row">
+							<h3><a href="{% url 'result' %}">VIEW RESULTS</a></h3>
+						</div><br><br>
+						<div class="row">
+							<h3><a href="{% url 'department' %}">Departmental Candidates</a></h3>
+						</div>
+						<br><br>
+						
+				</div>
+			</div>
+			{% endif %}
+
+		</div><!-- /.col-->
+	</div><!-- /.row -->	
+
+	<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="application" class="modal fade">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                        <h4 class="modal-title">Application Form</h4>
+                      </div>
+                      <div class="modal-body">
+
+                        <form role="form" action="{% url 'application' %}" method="POST" > 
+                        	{% csrf_token %}
+                            {% for field in candidate_form.visible_fields %}
+								<div class="form-group">
+                            		{{ field.errors }}
+									<b>{{ field.label}}</b>
+									{{ field }}<br/>
+									{{ field.help_text }}
+                          		</div>
+                          	  {% endfor %}
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                          <button type="reset" class="btn btn-danger">Clear</button>
+                        </form>
+                     
+                      </div>
+                    </div>
+                  </div>
+                </div>	
+{% endblock %}

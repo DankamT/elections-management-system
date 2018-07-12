@@ -1,0 +1,32 @@
+{% extends 'elections/dashboard.html' %}
+
+{% block content %}
+<br><br><br><br><br>
+	
+	<div class="row">
+		<div class="col-lg-2">
+				<div class="panel-heading"><a class="btn btn-primary" href="{% url 'department' %}"><- Go back</a></div></div>
+		<div class="col-lg-6">
+
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-4">
+								
+							</div>
+							
+						</div>
+						<br>
+						<div class="row">
+							<p><img src="media/{{candidate.student.picture}}" alt="{{candidate.student.firstname}}"></p>
+							<br><br>
+							<h3>Why did you choose to apply for the post of {{candidate.post}}?</h3>
+							<p><b>{{candidate.why_apply}}</b></p><br><br>
+							<h3>Why should you be voted?</h3>
+							<p><b>{{candidate.why_vote}}</b></p>
+						</div>
+						
+				</div>
+		</div><!-- /.col-->
+		<div class="col-lg-3"></div>
+	</div><!-- /.row -->	
+{% endblock %}

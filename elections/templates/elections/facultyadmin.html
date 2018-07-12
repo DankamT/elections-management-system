@@ -1,0 +1,25 @@
+{% extends 'elections/dashboard.html' %}
+
+{% block content %}
+<br><br><br>
+<div class="col-lg-12">
+<div class="col-lg-2"></div>
+<div class="col-lg-10">
+<table>
+	<h3> Departmental Candidates</h3>
+	<br><br>
+	{% for candidate in candidates %}
+	<tr>
+		<td>Name: {{ candidate.student.name }}</td>
+		<td></td>
+		<td>Post: {{ candidate.post.name }}</td>
+		<td></td>
+		<td>Matricule: {{ candidate.student.matricule}}</td>
+		<td></td>
+	
+	</tr>
+	{% endfor %}
+</table>
+</div>
+</div>
+{% endblock %}

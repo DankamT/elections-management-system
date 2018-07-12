@@ -1,0 +1,62 @@
+{% extends 'elections/base.html' %}
+
+{% block content %}
+<br><br><br>
+	
+	<div class="row">
+		<div class="col-lg-2"></div>
+		<div class="col-lg-8">
+			<div class="login-panel panel panel-default">
+
+				<div class="panel-heading"><h3><strong>Register Here!!!</strong></h3></div>
+					<div class="panel-body">
+						{% if registered %}
+							<strong>thank you for registering!!</strong>
+							<a href="{% url 'index' %}">Return to the homepage.</a><br />
+							<a href="{% url 'login' %}">login.</a><br />
+						{% else %}
+						<form id="user_form" method="post" action="{% url 'register'  %}" enctype="multipart/form-data">
+					    {% csrf_token %}
+					    <table>
+					    	{% for field in user_form.visible_fields %}
+								<div class="form-group">
+                            		<b>{{ field.label }}</b><br>
+									{{ field }}<br/>
+									{% if field.help_text %}
+          								<small style="display: none">{{ field.help_text }}</small>
+        							{% endif %}
+        							{% for error in field.errors %}
+          								<p style="color: red">{{ error }}</p>
+        							{% endfor %}
+                          		</div>
+                          	{% endfor %}
+					    {% for field in student_form.visible_fields %}
+								<div class="form-group">
+									<b>{{ field.label}}</b><br>
+									{{ field }}<br/>
+									{% if field.help_text %}
+          								<small style="display: none">{{ field.help_text }}</small>
+        							{% endif %}
+        							{% for error in field.errors %}
+          								<p style="color: red">{{ error }}</p>
+        							{% endfor %}
+                          		</div>
+                         {% endfor %}
+					    	
+    				</table>
+    				<br>
+    			<div class="row">
+    				<input class="btn btn-primary" type="submit" value="Register">
+    				<input class="btn btn-danger" type="reset" value="Cancel">
+    			</div>
+						</form>
+					{% endif %}
+				</div>
+			</div>
+		</div><!-- /.col-->
+		<div class="col-lg-2"></div>
+	</div><!-- /.row -->	
+{% endblock %}
+
+	
+
